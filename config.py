@@ -41,7 +41,7 @@ FORCE_PIC = os.environ.get("FORCE_PIC", "https://i.ibb.co/Q3fzgQ69/x.jpg")
 
 #--------------------------------------------
 SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "https://concrete-amity-opsoft-b1d77acb.koyeb.app")
-SHORTLINK_API = os.environ.get("SHORTLINK_API", "https://concrete-amity-opsoft-b1d77acb.koyeb.app/api)
+SHORTLINK_API = os.environ.get("SHORTLINK_API", "https://concrete-amity-opsoft-b1d77acb.koyeb.app/api")
 TUT_VID = os.environ.get("TUT_VID","https://t.me/tutorial_filx/5")
 SHORT_MSG = "<b>⌯ Here is Your Download Link, Must Watch Tutorial Before Clicking On Download...</b>"
 
