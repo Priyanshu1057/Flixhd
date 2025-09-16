@@ -1,6 +1,6 @@
 #(©)CodeFlix_Bots
 #rohit_1888 on Tg #Dont remove this line
-
+import httpx
 import base64
 import re
 import asyncio
@@ -223,11 +223,29 @@ def get_exp_time(seconds):
 # All rights reserved.
 #
 
-
 async def get_shortlink(url, api, link):
-    shortzy = Shortzy(api_key=api, base_site=url)
-    link = await shortzy.convert(link)
-    return link
+    try:
+        # Try Shortzy method first
+        shortzy = Shortzy(api_key=api, base_site=url)
+        return await shortzy.convert(link)
+    except Exception as e:
+        print(f"Shortzy failed: {e}, trying universal method...")
+
+        # Fallback: direct HTTP call
+        try:
+            async with httpx.AsyncClient() as client:
+                resp = await client.get(url, params={"api": api, "url": link}, timeout=15)
+                data = resp.json()
+                print("Universal shortener response:", data)
+
+            if isinstance(data, dict):
+                for key in ["shortenedUrl", "shorturl", "short", "url"]:
+                    if key in data:
+                        return data[key]
+            return link
+        except Exception as e2:
+            print(f"Universal fallback failed: {e2}")
+            return link
 
 
 subscribed = filters.create(is_subscribed)
