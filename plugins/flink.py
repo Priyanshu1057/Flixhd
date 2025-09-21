@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from database.database import db
 from helper_func import encode, decode
-from config import ADMINS, CHANNEL_ID
+from config import OWNER_ID, 
 import logging
 
 logger = logging.getLogger(__name__)
