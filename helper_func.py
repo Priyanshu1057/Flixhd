@@ -5,6 +5,7 @@ import base64
 import re
 import asyncio
 import time
+import base64
 from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus
 from config import *
@@ -28,6 +29,8 @@ from database.database import *
 #
 
 #used for cheking if a user is admin ~Owner also treated as admin level
+
+
 async def check_admin(filter, client, update):
     try:
         user_id = update.from_user.id       
@@ -35,6 +38,27 @@ async def check_admin(filter, client, update):
     except Exception as e:
         print(f"! Exception in check_admin: {e}")
         return False
+
+def encode(string):
+    '''Encode string to base64'''
+    try:
+        string_bytes = string.encode("ascii")
+        base64_bytes = base64.urlsafe_b64encode(string_bytes)
+        base64_string = (base64_bytes.decode("ascii")).strip("=")
+        return base64_string
+    except Exception as e:
+        return ""
+
+def decode(base64_string):
+    '''Decode base64 string'''
+    try:
+        base64_string = base64_string.strip() + "=" * (-len(base64_string) % 4)
+        base64_bytes = base64_string.encode("ascii")
+        string_bytes = base64.urlsafe_b64decode(base64_bytes)
+        string = string_bytes.decode("ascii")
+        return string
+    except Exception as e:
+        return ""
 
 
 # Don't Remove Credit @CodeFlix_Bots, @rohit_1888
